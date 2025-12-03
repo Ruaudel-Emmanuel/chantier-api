@@ -1,0 +1,71 @@
+# ============================================================================
+# requirements.txt - Toutes les dépendances du projet
+# ============================================================================
+
+# Django & DRF
+Django==4.2.8                          # Framework web
+djangorestframework==3.14.0             # API REST
+drf-spectacular==0.27.0                # Documentation Swagger/OpenAPI
+django-extensions==3.2.3               # Commandes Django supplémentaires
+django-filter==23.5                    # Filtrage avancé
+django-cors-headers==4.3.1             # CORS pour API mobile
+
+# Base de données
+psycopg2-binary==2.9.9                 # PostgreSQL driver
+sqlparse==0.4.4                        # Parsing SQL
+
+# Gestion des fichiers
+Pillow==10.1.0                         # Traitement d'images
+django-storages==1.14.2                # Stockage cloud (S3, Azure, etc.)
+boto3==1.34.14                         # AWS S3
+
+# Environnement & Configuration
+python-dotenv==1.0.0                   # Variables d'environnement (.env)
+python-decouple==3.8                   # Alternative à dotenv
+
+# Authentification & Sécurité
+PyJWT==2.8.1                           # JWT tokens (optionnel)
+cryptography==41.0.7                   # Cryptographie
+
+# Validation & Serialization
+jsonschema==4.20.0                     # Validation JSON
+
+# Testing
+pytest==7.4.3                          # Framework de test
+pytest-django==4.7.0                   # Plugin pytest pour Django
+pytest-cov==4.1.0                      # Coverage pour tests
+factory-boy==3.3.0                     # Fixtures intelligentes
+faker==21.0.0                          # Génération de données fake
+
+# Logging & Monitoring
+python-json-logger==2.0.7              # JSON logging
+sentry-sdk==1.39.1                     # Error tracking (optionnel)
+
+# Performance & Caching
+redis==5.0.1                           # Cache Redis (optionnel)
+celery==5.3.4                          # Async tasks (optionnel)
+
+# Development
+django-debug-toolbar==4.2.0             # Debug en développement
+ipython==8.18.1                        # Shell interactif amélioré
+black==23.12.0                         # Code formatting
+flake8==6.1.0                          # Linting
+isort==5.13.2                          # Import sorting
+mypy==1.7.1                            # Type checking
+
+# Documentation
+Sphinx==7.2.6                          # Documentation auto (optionnel)
+sphinx-rtd-theme==2.0.0                # Thème documentation
+
+# Utilitaires
+requests==2.31.0                       # HTTP client
+click==8.1.7                           # CLI helpers
+colorama==0.4.6                        # Couleurs console
+
+# Production Server
+gunicorn==21.2.0                       # WSGI HTTP Server
+whitenoise==6.6.0                      # Static files serving
+daphne==4.0.0                          # ASGI server (WebSocket)
+
+# API Clients
+httpx==0.25.2                          # HTTP client moderne (async ready)

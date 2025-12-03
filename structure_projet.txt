@@ -1,0 +1,47 @@
+📦 STRUCTURE COMPLÈTE DU PROJET
+================================
+
+chantiers_api/
+│
+├── 📄 README.md                      # Documentation principale
+├── 📄 .env.example                   # Variables d'environnement (exemple)
+├── 📄 .gitignore                     # Ignore Git
+├── 📄 requirements.txt               # Dépendances Python
+├── 📄 manage.py                      # Gestionnaire Django
+├── 📄 setup.py                       # Configuration du package
+│
+├── 📁 config/                        # Configuration Django
+│   ├── __init__.py
+│   ├── settings.py                   # Paramètres Django (DATABASE, INSTALLED_APPS, etc.)
+│   ├── urls.py                       # URLs principales
+│   ├── asgi.py                       # ASGI (WebSocket ready)
+│   └── wsgi.py                       # WSGI (Production)
+│
+├── 📁 chantiers/                     # App principale
+│   ├── migrations/
+│   │   └── __init__.py
+│   ├── __init__.py
+│   ├── models.py                     # Modèles : Chantier, Lot, Tâche, Equipe, etc.
+│   ├── serializers.py                # Serializers DRF
+│   ├── views.py                      # ViewSets et Permissions
+│   ├── permissions.py                # Permissions personnalisées
+│   ├── filters.py                    # Filtrage personnalisé
+│   ├── admin.py                      # Interface Django Admin
+│   ├── apps.py
+│   ├── urls.py                       # URLs du app
+│   └── tests.py                      # Tests unitaires
+│
+├── 📁 media/                         # Stockage des photos/documents
+│   └── chantiers/
+│       └── photos/
+│
+├── 📁 logs/                          # Logs applicatifs
+│   └── app.log
+│
+├── 📁 static/                        # Fichiers statiques
+│   └── admin/
+│
+└── 📁 docs/                          # Documentation API
+    ├── API.md                        # Endpoints et exemples
+    ├── INSTALLATION.md               # Guide d'installation
+    └── MOBILE_INTEGRATION.md         # Guide intégration mobile
