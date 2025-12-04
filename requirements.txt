@@ -24,7 +24,8 @@ python-dotenv==1.0.0                   # Variables d'environnement (.env)
 python-decouple==3.8                   # Alternative à dotenv
 
 # Authentification & Sécurité
-PyJWT==2.10.1                          # JWT tokens (optionnel)
+PyJWT==2.9.0
+                        # JWT tokens (optionnel)
 cryptography==41.0.7                   # Cryptographie
 
 # Validation & Serialization
