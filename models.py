@@ -7,9 +7,13 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.db.models import Sum, Q, F
 from decimal import Decimal
 import logging
+
+# En haut du fichier, après les imports existants
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 logger = logging.getLogger(__name__)
 
@@ -808,9 +812,6 @@ class Anomalie(models.Model):
 # ============================================================================
 # SIGNAUX DJANGO (Hooks automatiques)
 # ============================================================================
-
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 @receiver(post_save, sender=HeureTravail)
 def maj_heures_tache(sender, instance, **kwargs):
