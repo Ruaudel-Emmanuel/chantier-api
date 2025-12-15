@@ -1,0 +1,13 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=100"],
+    "python.formatting.provider": "black",
+    "[python]": {
+        "editor.rulers": [100],
+        "editor.formatOnSave": true
+    }
+}
