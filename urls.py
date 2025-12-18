@@ -1,64 +1,110 @@
-# ============================================================================
-# urls.py - Routes API principales
-# ============================================================================
+# =================================================================
+# urls.py - Configuration des routes URL principales
+# Routage API + Admin + Documentation Swagger
+# =================================================================
 
-from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-from .views import (
-    ChantiersViewSet, LotsViewSet, TachesViewSet,
-    HeuresTravailViewSet, EquipesViewSet, MembresViewSet,
-    SousTraitantsViewSet, AnomaliesViewSet
+from chantiers.views import (
+    AnomaliesViewSet,
+    ChantiersViewSet,
+    EquipesViewSet,
+    HeuresTravailViewSet,
+    LotsViewSet,
+    MembresViewSet,
+    SousTraitantsViewSet,
+    TachesViewSet
 )
 
-# ============================================================================
-# Router DRF - Enregistrement automatique des ViewSets
-# ============================================================================
-router = DefaultRouter()
+# =================================================================
+# CONFIGURATION DU ROUTEUR DRF
+# =================================================================
 
-# Endpoints principaux
+router = DefaultRouter()
 router.register(r'chantiers', ChantiersViewSet, basename='chantier')
 router.register(r'lots', LotsViewSet, basename='lot')
 router.register(r'taches', TachesViewSet, basename='tache')
-router.register(r'heures_travail', HeuresTravailViewSet, basename='heures')
+router.register(
+    r'heures',
+    HeuresTravailViewSet,
+    basename='heuretravail'
+)
 router.register(r'equipes', EquipesViewSet, basename='equipe')
 router.register(r'membres', MembresViewSet, basename='membre')
-router.register(r'sous_traitants', SousTraitantsViewSet, basename='soustraitant')
+router.register(
+    r'soustraitants',
+    SousTraitantsViewSet,
+    basename='soustraitant'
+)
 router.register(r'anomalies', AnomaliesViewSet, basename='anomalie')
 
-# ============================================================================
-# URLs patterns
-# ============================================================================
+# =================================================================
+# PATTERNS URL
+# =================================================================
+
 urlpatterns = [
-    # Router automatique
-    path('', include(router.urls)),
-    
-    # Endpoints de documentation
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('schema/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), 
-         name='swagger-ui'),
-    path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), 
-         name='redoc'),
+    # Admin Django
+    path('admin/', admin.site.urls),
+
+    # API REST
+    path('api/v1/', include(router.urls)),
+
+    # Auth DRF (login/logout pour Browsable API)
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
-# ============================================================================
-# URLs principales (à inclure dans config/urls.py)
-# ============================================================================
-# 
-# Dans config/urls.py :
-#
-# from django.contrib import admin
-# from django.urls import path, include
-# from django.conf import settings
-# from django.conf.urls.static import static
-#
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('api/v1/', include('chantiers.urls')),
-#     path('api/auth/', include('rest_framework.urls')),
-# ]
-#
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# =================================================================
+# DOCUMENTATION API (Swagger/ReDoc)
+# =================================================================
+
+if settings.DEBUG:
+    from drf_yasg import openapi
+    from drf_yasg.views import get_schema_view
+    from rest_framework import permissions
+
+    schema_view = get_schema_view(
+        openapi.Info(
+            title="Chantiers API",
+            default_version='v1',
+            description=(
+                "API REST pour gestion de chantiers BTP - "
+                "Suivi tâches, heures, équipes, anomalies"
+            ),
+            terms_of_service="https://www.example.com/terms/",
+            contact=openapi.Contact(email="contact@chantiers.local"),
+            license=openapi.License(name="MIT License"),
+        ),
+        public=True,
+        permission_classes=[permissions.AllowAny],
+    )
+
+    urlpatterns += [
+        path(
+            'swagger/',
+            schema_view.with_ui('swagger', cache_timeout=0),
+            name='schema-swagger-ui'
+        ),
+        path(
+            'redoc/',
+            schema_view.with_ui('redoc', cache_timeout=0),
+            name='schema-redoc'
+        ),
+    ]
+
+# =================================================================
+# FICHIERS MEDIA (en développement uniquement)
+# =================================================================
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
+    urlpatterns += static(
+        settings.STATIC_URL,
+        document_root=settings.STATIC_ROOT
+    )
