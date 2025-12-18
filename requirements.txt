@@ -1,57 +1,48 @@
-# ============================================================================
-# requirements.txt - Toutes les dépendances du projet
-# ============================================================================
+# =================================================================
+# CHANTIERS API - REQUIREMENTS
+# =================================================================
 
-
-
-
-# Django & DRF
-django>=4.2.0
-Django==4.2.8
+# Framework Core
 Django==4.2.27
 djangorestframework==3.14.0
-drf-spectacular==0.27.2
-django-extensions==3.2.3
-django-filter==23.5
+
+# Base de données PostgreSQL
+psycopg2-binary==2.9.9
+
+# CORS (pour le frontend React/Angular)
 django-cors-headers==4.3.1
 
-# DB / utils
-psycopg2-binary==2.9.9
-sqlparse==0.4.4
+# Filtres API
+django-filter==23.5
 
-# Storage / S3
-Pillow==10.1.0
-django-storages==1.14.2
-boto3==1.34.14
+# Documentation API (Swagger/ReDoc)
+drf-yasg==1.21.7
 
-# Config
-python-dotenv==1.0.0
-python-decouple==3.8
-
-# Auth JWT
-PyJWT==2.9.0
+# Authentification JWT
 djangorestframework-simplejwt==5.3.1
 
-# Confort dev (facultatif pour la prod/CI)
-ipython==8.12.3                     # Shell interactif amélioré
-black==23.12.0                         # Code formatting
-flake8==6.1.0                          # Linting
-isort==5.13.2                          # Import sorting
-mypy==1.7.1                            # Type checking
+# Gestion des fichiers uploadés
+Pillow==10.1.0
 
-# Documentation
-Sphinx==7.2.6                          # Documentation auto (optionnel)
-sphinx-rtd-theme==2.0.0                # Thème documentation
+# Variables d'environnement
+python-decouple==3.8
+
+# Serveur WSGI pour production
+gunicorn==21.2.0
+
+# Fichiers statiques en production
+whitenoise==6.6.0
+
+# Tests
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-cov==4.1.0
+factory-boy==3.3.0
+faker==22.0.0
+
+# Qualité de code
+flake8==7.0.0
+black==23.12.1
 
 # Utilitaires
-requests==2.31.0                       # HTTP client
-click==8.1.7                           # CLI helpers
-colorama==0.4.6                        # Couleurs console
-
-# Production Server
-gunicorn==21.2.0                       # WSGI HTTP Server
-whitenoise==6.6.0                      # Static files serving
-daphne==4.0.0                          # ASGI server (WebSocket)
-
-# API Clients
-httpx==0.25.2                          # HTTP client moderne (async ready)
+python-dateutil==2.8.2
